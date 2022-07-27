@@ -18,6 +18,7 @@
     "data": [
         "security/course_security.xml",
         "security/ir.model.access.csv",
+        "wizards/attendee.xml",
         "views/course_views.xml",
         "views/session_views.xml",
         "views/res_partner_views.xml",
