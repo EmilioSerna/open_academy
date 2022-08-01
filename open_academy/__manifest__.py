@@ -12,7 +12,8 @@
     "version": "15.0.1.0.0",
 
     "depends": [
-        "base"
+        "base",
+        "board",
     ],
 
     "data": [
@@ -22,6 +23,7 @@
         "views/course_views.xml",
         "views/session_views.xml",
         "views/res_partner_views.xml",
+        "views/session_dashboard.xml",
         "report/session_report.xml",
     ],
 

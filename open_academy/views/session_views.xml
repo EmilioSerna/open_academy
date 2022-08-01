@@ -6,7 +6,25 @@
         <field name="view_mode">tree,form,calendar,graph,kanban</field>
     </record>
 
-    <menuitem id="session_menu" name="Sessions" sequence="2"
+    <record id="session_graph_display_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">graph</field>
+    </record>
+
+    <record id="session_calendar_display_action" model="ir.actions.act_window">
+        <field name="name">Calendar</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">calendar</field>
+    </record>
+
+    <record id="session_list_display_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="session_menu" name="Sessions" sequence="4"
     action="session_action" parent="open_academy_root_menu"/>
 
     <record id="session_view_form" model="ir.ui.view">
