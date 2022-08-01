@@ -1,0 +1,35 @@
+<odoo>
+    <record id="report_session" model="ir.actions.report">
+        <field name="name">Session Report</field>
+        <field name="model">session</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">open_academy.session_view_report</field>
+        <field name="report_file">open_academy.session_view_report</field>
+        <field name="attachment_use" eval="True"/>
+        <field name="binding_model_id" ref="model_session"/>
+        <field name="binding_type">report</field>
+    </record>
+
+    <template id="session_view_report">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="session">
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <h2 t-field="session.name" />
+                    </div>
+                    <div>
+                        <h2>Start Date:</h2>
+                        <h2 t-field="session.start_date" />
+                    </div>
+                    <br />
+                    <div>
+                        <h2>Attendees:</h2>
+                        <t t-foreach="session.attendee_ids" t-as="attendee">
+                            <h5 t-field="attendee.name" />
+                        </t>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+</odoo>

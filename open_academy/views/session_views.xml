@@ -3,10 +3,28 @@
     <record id="session_action" model="ir.actions.act_window">
         <field name="name">Sessions</field>
         <field name="res_model">session</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,calendar,graph,kanban</field>
     </record>
 
-    <menuitem id="session_menu" name="Sessions" sequence="2"
+    <record id="session_graph_display_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">graph</field>
+    </record>
+
+    <record id="session_calendar_display_action" model="ir.actions.act_window">
+        <field name="name">Calendar</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">calendar</field>
+    </record>
+
+    <record id="session_list_display_action" model="ir.actions.act_window">
+        <field name="name">Sessions</field>
+        <field name="res_model">session</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem id="session_menu" name="Sessions" sequence="4"
     action="session_action" parent="open_academy_root_menu"/>
 
     <record id="session_view_form" model="ir.ui.view">
@@ -40,12 +58,59 @@
         <field name="name">session.view.tree</field>
         <field name="model">session</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-info="duration&lt;120" decoration-danger="duration&gt;360">
                 <field name="name"/>
                 <field name="start_date" />
+                <field name="duration" />
                 <field name="seats"/>
                 <field name="percent_seats" widget="progressbar" />
             </tree>
+        </field>
+    </record>
+
+    <record id="session_view_calendar" model="ir.ui.view">
+        <field name="name">session.view.calendar</field>
+        <field name="model">session</field>
+        <field name="arch" type="xml">
+            <calendar string="Sessions" date_start="start_date" color="name">
+                <field name="name"/>
+                <field name="start_date" />
+                <field name="duration" />
+                <field name="seats"/>
+                <field name="percent_seats" widget="progressbar" />
+            </calendar>
+        </field>
+    </record>
+
+    <record id="session_view_graph" model="ir.ui.view">
+        <field name="name">session.view.graph</field>
+        <field name="model">session</field>
+        <field name="arch" type="xml">
+            <graph string="Number of attendees">
+                <field name="course_id"/>
+                <field name="attendee_count" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="partner_kanban_view" model="ir.ui.view">
+        <field name="name">session.view.kanban</field>
+        <field name="model">session</field>
+        <field name="arch" type="xml">
+            <kanban class="o_res_partner_kanban" default_group_by="course_id">
+                <field name="name"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="name"/>
+                                </strong>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 </odoo>
